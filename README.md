@@ -14,7 +14,6 @@ Built with [Next.js](https://nextjs.org) 16, [React](https://react.dev) 19, [Tai
 ### Development
 
 ```bash
-cd demo
 npm install
 npm run dev
 ```
@@ -24,7 +23,6 @@ Open [http://localhost:3000](http://localhost:3000) to view the site.
 ### Build
 
 ```bash
-cd demo
 npm run build
 npm run start
 ```
@@ -32,23 +30,24 @@ npm run start
 ### Lint
 
 ```bash
-cd demo
 npm run lint
 ```
 
 ## Project Structure
 
 ```
-├── components/          # Reusable component library
-│   ├── elements/        # Primitive UI components (Button, Link, Container, etc.)
-│   ├── icons/           # SVG icon components (100+)
-│   └── sections/        # Full page sections (Hero, Pricing, FAQs, etc.)
-├── demo/                # Next.js application
-│   └── src/
-│       ├── app/         # App router pages and layout
-│       └── components/  # App-specific component copies
-├── pages/               # Standalone full-page examples (multiple variants)
-└── tailwind.css         # Custom theme (mist color palette, fonts)
+├── src/
+│   ├── app/             # Next.js app router pages and layout
+│   └── components/      # Reusable UI components
+│       ├── elements/    # Primitive UI components (Button, Link, Container, etc.)
+│       ├── icons/       # SVG icon components (100+)
+│       └── sections/    # Full page sections (Hero, Pricing, FAQs, etc.)
+├── public/              # Static assets (images, etc.)
+├── package.json
+├── tsconfig.json
+├── next.config.ts
+├── eslint.config.mjs
+└── postcss.config.mjs
 ```
 
 ## About Kickoff

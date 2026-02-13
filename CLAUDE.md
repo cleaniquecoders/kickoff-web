@@ -8,12 +8,9 @@ This is a promotional/marketing website for [Kickoff](https://github.com/cleaniq
 
 The site is built on the **Oatmeal** Tailwind Plus SaaS Marketing Kit using **Next.js 16**, **React 19**, **Tailwind CSS v4**, and **TypeScript**.
 
-## Development (demo app)
-
-The runnable Next.js app lives in `demo/`:
+## Development
 
 ```bash
-cd demo
 npm install
 npm run dev      # Start dev server
 npm run build    # Production build
@@ -22,34 +19,44 @@ npm run lint     # ESLint (core-web-vitals + typescript)
 
 ## Architecture
 
-### Two-layer structure
+### Project structure
 
-- **`components/`** — The reusable component library (template source). Contains `elements/`, `icons/`, and `sections/` subdirectories. These are framework-agnostic React components using `clsx` and `@tailwindplus/elements`.
-- **`demo/`** — A full Next.js app that imports from `components/` via the `@/*` path alias (resolves to `demo/src/*`). The demo app has its own copy of all components under `demo/src/components/`.
-- **`pages/`** — Standalone full-page examples (home-01..03, about-01..03, pricing-01..03, 404-01..02, privacy-policy-01..02). These are complete page compositions showing different layout variants. They include navbar, main content, and footer inline.
+```
+├── src/
+│   ├── app/             # Next.js app router pages and layout
+│   └── components/      # Reusable UI components
+│       ├── elements/    # Primitive UI components (Button, Link, Container, etc.)
+│       ├── icons/       # SVG icon components (100+)
+│       └── sections/    # Full page sections (Hero, Pricing, FAQs, etc.)
+├── public/              # Static assets (images)
+├── package.json
+├── tsconfig.json
+├── next.config.ts
+├── eslint.config.mjs
+└── postcss.config.mjs
+```
 
 ### Component patterns
 
-- **Elements** (`components/elements/`): Primitive UI components — Button, Link, Container, Heading, Text, Screenshot, EmailSignupForm, InstallCommand, etc. Each exports typed React components using `ComponentProps<>` patterns.
-- **Sections** (`components/sections/`): Full page sections — Hero variants, Features, Pricing, FAQs, Testimonials, Stats, Footer, Navbar, CTA, Team, Document. Each section accepts content via props (headline, subheadline, cta, etc.) as ReactNode.
-- **Icons** (`components/icons/`): ~100+ SVG icon components. Social icons live in `icons/social/`.
+- **Elements** (`src/components/elements/`): Primitive UI components — Button, Link, Container, Heading, Text, Screenshot, EmailSignupForm, InstallCommand, etc. Each exports typed React components using `ComponentProps<>` patterns.
+- **Sections** (`src/components/sections/`): Full page sections — Hero variants, Features, Pricing, FAQs, Testimonials, Stats, Footer, Navbar, CTA, Team, Document. Each section accepts content via props (headline, subheadline, cta, etc.) as ReactNode.
+- **Icons** (`src/components/icons/`): ~100+ SVG icon components. Social icons live in `icons/social/`.
 
 ### Key conventions
 
 - Components use `clsx/lite` for conditional class merging
 - Dark mode support via `dark:` / `not-dark:` Tailwind variants throughout
-- Custom color palette: `mist-50` through `mist-950` (defined in `tailwind.css`)
+- Custom color palette: `mist-50` through `mist-950` (defined in `src/app/globals.css`)
 - Fonts: Mona Sans (display) and Inter (sans) loaded from Google Fonts
-- All link components use `<a>` tags — replace with Next.js `Link` or framework equivalent for SPA navigation
-- `pages/` files are self-contained (include Navbar + Main + Footer); `demo/src/app/page.tsx` pages rely on layout for shared chrome
-
-### Demo app structure
-
-- `demo/src/app/layout.tsx` — Root layout with shared Navbar and Footer
-- `demo/src/app/page.tsx` — Home page (sections only, no navbar/footer)
-- `demo/src/app/{about,pricing,privacy-policy,404}/page.tsx` — Additional pages
-- `demo/src/app/globals.css` — Tailwind imports + custom theme
+- `@/*` path alias resolves to `./src/*` (configured in tsconfig.json)
 - Prettier configured with `prettier-plugin-organize-imports` and `prettier-plugin-tailwindcss`
+
+### App structure
+
+- `src/app/layout.tsx` — Root layout with shared Navbar and Footer
+- `src/app/page.tsx` — Home page (sections only, no navbar/footer)
+- `src/app/{about,pricing,privacy-policy,404}/page.tsx` — Additional pages
+- `src/app/globals.css` — Tailwind imports + custom theme
 
 ## Adapting for Kickoff promotion
 
