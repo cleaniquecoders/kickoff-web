@@ -1,27 +1,23 @@
-import Image from 'next/image'
-
-import { ButtonLink, PlainButtonLink } from '@/components/elements/button'
+import { ButtonLink } from '@/components/elements/button'
 import { Main } from '@/components/elements/main'
 import { GitHubIcon } from '@/components/icons/social/github-icon'
-import { XIcon } from '@/components/icons/social/x-icon'
-import { YouTubeIcon } from '@/components/icons/social/youtube-icon'
 import {
-  FooterCategory,
   FooterLink,
-  FooterWithNewsletterFormCategoriesAndSocialIcons,
-  NewsletterForm,
+  FooterWithLinksAndSocialIcons,
   SocialLink,
-} from '@/components/sections/footer-with-newsletter-form-categories-and-social-icons'
+} from '@/components/sections/footer-with-links-and-social-icons'
 import {
   NavbarLink,
   NavbarLogo,
-  NavbarWithLinksActionsAndCenteredLogo,
-} from '@/components/sections/navbar-with-links-actions-and-centered-logo'
+  NavbarWithLogoActionsAndLeftAlignedLinks,
+} from '@/components/sections/navbar-with-logo-actions-and-left-aligned-links'
 import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Oatmeal Kit Demo',
+  title: 'Kickoff — Bootstrap Laravel Projects',
+  description:
+    'Kickoff bootstraps Laravel projects with Livewire, Pest, PHPStan, Rector, GitHub Actions, admin dashboard, roles & permissions, and deployment scripts.',
 }
 
 export default function RootLayout({
@@ -45,102 +41,45 @@ export default function RootLayout({
       </head>
       <body>
         <>
-          <NavbarWithLinksActionsAndCenteredLogo
+          <NavbarWithLogoActionsAndLeftAlignedLinks
             id="navbar"
             links={
               <>
-                <NavbarLink href="/pricing">Pricing</NavbarLink>
-                <NavbarLink href="/about">About</NavbarLink>
-                <NavbarLink href="#">Docs</NavbarLink>
-                <NavbarLink href="#" className="sm:hidden">
-                  Log in
-                </NavbarLink>
+                <NavbarLink href="#features">Features</NavbarLink>
+                <NavbarLink href="#screenshots">Screenshots</NavbarLink>
+                <NavbarLink href="#faq">FAQ</NavbarLink>
               </>
             }
             logo={
               <NavbarLogo href="/">
-                <Image
-                  src="/img/logos/oatmeal-mona-color-mist-950.svg"
-                  alt="Oatmeal"
-                  className="dark:hidden"
-                  width={113}
-                  height={28}
-                />
-                <Image
-                  src="/img/logos/oatmeal-mona-color-white.svg"
-                  alt="Oatmeal"
-                  className="not-dark:hidden"
-                  width={113}
-                  height={28}
-                />
+                <span className="text-xl font-bold tracking-tight text-mist-950 dark:text-white">Kickoff</span>
               </NavbarLogo>
             }
             actions={
-              <>
-                <PlainButtonLink href="#" className="max-sm:hidden">
-                  Log in
-                </PlainButtonLink>
-                <ButtonLink href="#">Get started</ButtonLink>
-              </>
+              <ButtonLink href="https://github.com/cleaniquecoders/kickoff">
+                <GitHubIcon className="size-4" />
+                GitHub
+              </ButtonLink>
             }
           />
 
           <Main>{children}</Main>
 
-          <FooterWithNewsletterFormCategoriesAndSocialIcons
+          <FooterWithLinksAndSocialIcons
             id="footer"
-            cta={
-              <NewsletterForm
-                headline="Stay in the loop"
-                subheadline={
-                  <p>
-                    Get customer support tips, product updates and customer stories that you can archive as soon as they
-                    arrive.
-                  </p>
-                }
-                action="#"
-              />
-            }
             links={
               <>
-                <FooterCategory title="Product">
-                  <FooterLink href="#">Features</FooterLink>
-                  <FooterLink href="#">Pricing</FooterLink>
-                  <FooterLink href="#">Integrations</FooterLink>
-                </FooterCategory>
-                <FooterCategory title="Company">
-                  <FooterLink href="#">About</FooterLink>
-                  <FooterLink href="#">Careers</FooterLink>
-                  <FooterLink href="#">Blog</FooterLink>
-                  <FooterLink href="#">Press Kit</FooterLink>
-                </FooterCategory>
-                <FooterCategory title="Resources">
-                  <FooterLink href="#">Help Center</FooterLink>
-                  <FooterLink href="#">API Docs</FooterLink>
-                  <FooterLink href="#">Status</FooterLink>
-                  <FooterLink href="#">Contact</FooterLink>
-                </FooterCategory>
-                <FooterCategory title="Legal">
-                  <FooterLink href="/privacy-policy">Privacy Policy</FooterLink>
-                  <FooterLink href="#">Terms of Service</FooterLink>
-                  <FooterLink href="#">Security</FooterLink>
-                </FooterCategory>
+                <FooterLink href="https://github.com/cleaniquecoders/kickoff">GitHub</FooterLink>
+                <FooterLink href="https://github.com/cleaniquecoders/kickoff#readme">Documentation</FooterLink>
+                <FooterLink href="https://packagist.org/packages/cleaniquecoders/kickoff">Packagist</FooterLink>
               </>
             }
-            fineprint="© 2025 Oatmeal, Inc."
             socialLinks={
-              <>
-                <SocialLink href="https://x.com" name="X">
-                  <XIcon />
-                </SocialLink>
-                <SocialLink href="https://github.com" name="GitHub">
-                  <GitHubIcon />
-                </SocialLink>
-                <SocialLink href="https://www.youtube.com" name="YouTube">
-                  <YouTubeIcon />
-                </SocialLink>
-              </>
+              <SocialLink href="https://github.com/cleaniquecoders/kickoff" name="GitHub">
+                <GitHubIcon />
+              </SocialLink>
             }
+            fineprint="© 2025 CleaniqueCoders. Kickoff is open-source software."
           />
         </>
       </body>
