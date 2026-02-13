@@ -1,144 +1,77 @@
-# Oatmeal
+# Kickoff — Marketing Website
 
-Oatmeal is a [Tailwind Plus](https://tailwindcss.com/plus) SaaS Marketing Kit built using [Tailwind CSS](https://tailwindcss.com) and [Elements](https://tailwindcss.com/plus/ui-blocks/documentation/elements).
+Marketing and promotional website for [Kickoff](https://github.com/cleaniquecoders/kickoff), a Composer package that bootstraps Laravel projects with production-ready tooling.
 
-## Quickstart using your coding agent
+Built with [Next.js](https://nextjs.org) 16, [React](https://react.dev) 19, [Tailwind CSS](https://tailwindcss.com) v4, and [Tailwind Plus Elements](https://tailwindcss.com/plus/ui-blocks/documentation/elements).
 
-If you are using a coding agent like Claude Code, Cursor, Codex, etc., the quickest way to get started is by using the following prompt and pointing its to this file:
+## Getting Started
 
-```
-Please install the Oatmeal Tailwind Plus template into my project following the documentation from @path-to-oatmeal-template/README.md.
-```
+### Prerequisites
 
-## Installation
+- Node.js 18+
+- npm
 
-### 1. Install required dependencies
-
-Oatmeal requires Tailwind CSS v4 to be set up in your project. If this is not set up already, check out the [official installation guide for your setup](https://tailwindcss.com/docs/installation) or the [Tailwind CSS v4 upgrade guide](https://tailwindcss.com/docs/upgrade-guide).
-
-In addition to Tailwind CSS, add the following dependencies to your project:
+### Development
 
 ```bash
-npm install clsx @tailwindplus/elements@latest
+cd demo
+npm install
+npm run dev
 ```
 
-### 2. Set up CSS file
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-Add the following CSS to your global stylesheet:
-
-```css
-@import 'tailwindcss';
-
-@theme {
-  --font-display: 'Mona Sans', sans-serif;
-  --font-display--font-variation-settings: 'wdth' 112.5;
-  --font-sans: 'Inter', system-ui, sans-serif;
-
-  --color-mist-50: oklch(98.7% 0.002 197.1);
-  --color-mist-100: oklch(96.3% 0.002 197.1);
-  --color-mist-200: oklch(92.5% 0.005 214.3);
-  --color-mist-300: oklch(87.2% 0.007 219.6);
-  --color-mist-400: oklch(72.3% 0.014 214.4);
-  --color-mist-500: oklch(56% 0.021 213.5);
-  --color-mist-600: oklch(45% 0.017 213.2);
-  --color-mist-700: oklch(37.8% 0.015 216);
-  --color-mist-800: oklch(27.5% 0.011 216.9);
-  --color-mist-900: oklch(21.8% 0.008 223.9);
-  --color-mist-950: oklch(14.8% 0.004 228.8);
-}
-
-@layer base {
-  html {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background-color: var(--color-mist-100);
-    --scroll-padding-top: 0;
-    scroll-padding-top: var(--scroll-padding-top);
-
-    @variant dark {
-      background-color: var(--color-mist-950);
-    }
-  }
-}
-```
-
-### 3. Set up fonts
-
-Add the following meta tags to the `<head>` tag in your project:
-
-```html
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,112.5,200..900;1,112.5,200..900&display=swap"
-  rel="stylesheet"
-/>
-<link
-  href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-  rel="stylesheet"
-/>
-```
-
-### 4. Copy the components to your project
-
-Add the components from the Oatmeal ZIP download to your project:
+### Build
 
 ```bash
-cp ~/Downloads/oatmeal/components /your-project/src/components
+cd demo
+npm run build
+npm run start
 ```
 
-### 5. Set up the `@` alias
+### Lint
 
-All the components in Oatmeal use an `@` alias that's expected to resolve to the
-components directory in your project. If you don't already have this in place,
-update your `tsconfig.json`:
-
-```json
-{
-  "compilerOptions": {
-    // ... your existing TypeScript config
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  }
-}
+```bash
+cd demo
+npm run lint
 ```
 
-### 6. Replace anchor links with SPA-link equivalent (Optional)
-
-If your framework provides an SPA-link component, you'll want to replace all `<a>` instances in the Oatmeal components with your link component.
-
-Here's an example of how you'd do this in Next.js using their `Link` component:
-
-```diff
-diff --git a/components/elements/link.tsx b/components/elements/link.tsx
-index 722b00e..f341d85 100644
---- a/components/elements/link.tsx
-+++ b/components/elements/link.tsx
-@@ -1,5 +1,6 @@
- import { clsx } from 'clsx/lite'
-+import NextLink from 'next/link'
- import type { ComponentProps } from 'react'
-
-@@ -9,7 +10,7 @@ export function Link({
-   href: string
- } & Omit<ComponentProps<'a'>, 'href'>) {
-   return (
--    <a
-+    <NextLink
-       href={href}
-       className={clsx(
-         'inline-flex items-center gap-2 text-sm/7 font-medium',
+## Project Structure
 
 ```
+├── components/          # Reusable component library
+│   ├── elements/        # Primitive UI components (Button, Link, Container, etc.)
+│   ├── icons/           # SVG icon components (100+)
+│   └── sections/        # Full page sections (Hero, Pricing, FAQs, etc.)
+├── demo/                # Next.js application
+│   └── src/
+│       ├── app/         # App router pages and layout
+│       └── components/  # App-specific component copies
+├── pages/               # Standalone full-page examples (multiple variants)
+└── tailwind.css         # Custom theme (mist color palette, fonts)
+```
+
+## About Kickoff
+
+Kickoff automates the setup of new Laravel projects with:
+
+- **Livewire, Pest & Git** — Fresh Laravel install with essential integrations
+- **Code Quality** — PHPStan, Rector, and Laravel Debugbar pre-configured
+- **CI/CD** — GitHub Actions workflows for automated testing and analysis
+- **Admin Dashboard** — User stats, role/permission management, app settings
+- **Deployment Scripts** — Executable bin scripts for deploy, backup, and database ops
+- **Community Files** — Contributing guidelines, security policy, changelog templates
+
+### Install Kickoff
+
+```bash
+composer global require cleaniquecoders/kickoff
+composer global require laravel/installer
+kickoff start <owner> <project-name>
+```
+
+Learn more at [github.com/cleaniquecoders/kickoff](https://github.com/cleaniquecoders/kickoff).
 
 ## License
 
-This site template is a commercial product and is licensed under the [Tailwind Plus license](https://tailwindcss.com/plus/license).
-
-## Learn more
-
-To learn more about the technologies used in this site template, see the following resources:
-
-- [Tailwind CSS](https://tailwindcss.com/docs) - the official Tailwind CSS documentation
-- [Elements](https://tailwindcss.com/plus/ui-blocks/documentation/elements) - the official Elements documentation
+This site template is based on the Oatmeal SaaS Marketing Kit, a commercial product licensed under the [Tailwind Plus license](https://tailwindcss.com/plus/license).
