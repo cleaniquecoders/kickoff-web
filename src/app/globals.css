@@ -1,10 +1,41 @@
 @import 'tailwindcss';
 
-@theme {
-  --font-display: 'Mona Sans', sans-serif;
-  --font-display--font-variation-settings: 'wdth' 112.5;
-  --font-sans: 'Inter', system-ui, sans-serif;
+/* Light theme is the default for everyone. Dark styles only apply when a
+   `.dark` class is set on <html> (no toggle ships yet, so the site is always
+   light — terminal windows stay dark by design). */
+@custom-variant dark (&:where(.dark, .dark *));
 
+@theme {
+  --font-display: 'Martian Mono', monospace;
+  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  /* Warm terminal blacks */
+  --color-ink-950: #0e0b07;
+  --color-ink-900: #171310;
+  --color-ink-800: #221b14;
+  --color-ink-700: #3a3128;
+  --color-ink-600: #55493a;
+  --color-ink-500: #75665a;
+
+  /* Warm paper whites */
+  --color-bone-50: #f5efe3;
+  --color-bone-100: #ede6d8;
+  --color-bone-200: #e0d6c2;
+  --color-bone-300: #c9bfae;
+  --color-bone-500: #9c9184;
+
+  /* Laravel red-orange — the accent */
+  --color-flame-300: #ff8a7a;
+  --color-flame-400: #ff6252;
+  --color-flame-500: #ff2d20;
+  --color-flame-600: #d92616;
+  --color-flame-700: #b01e10;
+
+  /* Terminal output green — used only inside terminal windows */
+  --color-term-green: #53d86a;
+
+  /* Legacy Oatmeal palette (kept for unused kit components) */
   --color-mist-50: oklch(98.7% 0.002 197.1);
   --color-mist-100: oklch(96.3% 0.002 197.1);
   --color-mist-200: oklch(92.5% 0.005 214.3);
@@ -22,12 +53,117 @@
   html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: var(--color-mist-100);
+    background-color: var(--color-bone-50);
+    color: var(--color-ink-900);
     --scroll-padding-top: 0;
     scroll-padding-top: var(--scroll-padding-top);
 
     @variant dark {
-      background-color: var(--color-mist-950);
+      background-color: var(--color-ink-950);
+      color: var(--color-bone-100);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  ::selection {
+    background-color: var(--color-flame-500);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-flame-500);
+    outline-offset: 2px;
+  }
+
+  /* Smoothly animate FAQ answers open/closed using the native
+     <details> content transition. Height tweens 0 ↔ auto via
+     interpolate-size; browsers without support fall back to an
+     instant (still fully functional) toggle. */
+  details.faq-item::details-content {
+    height: 0;
+    overflow: clip;
+    opacity: 0;
+    interpolate-size: allow-keywords;
+    transition:
+      height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      content-visibility 0.3s allow-discrete;
+  }
+
+  details.faq-item[open]::details-content {
+    height: auto;
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    details.faq-item::details-content {
+      transition: none;
+    }
+  }
+}
+
+/* Terminal session animation — used by the hero */
+@keyframes term-typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 36ch;
+  }
+}
+
+@keyframes term-appear {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes term-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@layer components {
+  .term-typed {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    vertical-align: bottom;
+    width: 36ch;
+    animation: term-typing 1.8s steps(36, end) 0.5s both;
+  }
+
+  .term-line {
+    opacity: 0;
+    animation: term-appear 0.15s ease-out forwards;
+  }
+
+  .term-caret {
+    animation: term-blink 1.1s step-end infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .term-typed {
+      animation: none;
+      width: 36ch;
+    }
+    .term-line {
+      animation: none;
+      opacity: 1;
+    }
+    .term-caret {
+      animation: none;
     }
   }
 }

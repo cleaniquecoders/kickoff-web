@@ -14,7 +14,7 @@ export function NavbarLink({
     <Link
       href={href}
       className={clsx(
-        'group inline-flex items-center justify-between gap-2 text-3xl/10 font-medium text-mist-950 lg:text-sm/7 dark:text-white',
+        'group inline-flex items-center justify-between gap-2 font-mono text-2xl/10 text-ink-700 hover:text-flame-600 lg:text-sm/7 dark:text-bone-300 dark:hover:text-flame-400',
         className,
       )}
       {...props}
@@ -45,8 +45,16 @@ export function NavbarWithLogoActionsAndLeftAlignedLinks({
   actions: ReactNode
 } & ComponentProps<'header'>) {
   return (
-    <header className={clsx('sticky top-0 z-10 bg-mist-100 dark:bg-mist-950', className)} {...props}>
+    <header
+      className={clsx(
+        'sticky top-0 z-10 border-b border-bone-200 bg-bone-50/90 backdrop-blur dark:border-ink-800 dark:bg-ink-950/90',
+        className,
+      )}
+      {...props}
+    >
       <style>{`:root { --scroll-padding-top: 5.25rem }`}</style>
+      {/* Brand stripe */}
+      <div className="h-0.5 bg-gradient-to-r from-flame-700 via-flame-500 to-flame-400" aria-hidden="true" />
       <nav>
         <div className="mx-auto flex h-(--scroll-padding-top) max-w-7xl items-center gap-4 px-6 lg:px-10">
           <div className="flex flex-1 items-center gap-12">
@@ -60,7 +68,7 @@ export function NavbarWithLogoActionsAndLeftAlignedLinks({
               command="show-modal"
               commandfor="mobile-menu"
               aria-label="Toggle menu"
-              className="inline-flex rounded-full p-1.5 text-mist-950 hover:bg-mist-950/10 lg:hidden dark:text-white dark:hover:bg-white/10"
+              className="inline-flex rounded-md p-1.5 text-ink-900 hover:bg-ink-900/5 lg:hidden dark:text-bone-100 dark:hover:bg-bone-100/10"
             >
               <svg viewBox="0 0 24 24" fill="currentColor" className="size-6">
                 <path
@@ -75,13 +83,13 @@ export function NavbarWithLogoActionsAndLeftAlignedLinks({
 
         <ElDialog className="lg:hidden">
           <dialog id="mobile-menu" className="backdrop:bg-transparent">
-            <ElDialogPanel className="fixed inset-0 bg-mist-100 px-6 py-6 lg:px-10 dark:bg-mist-950">
+            <ElDialogPanel className="fixed inset-0 bg-bone-50 px-6 py-6 lg:px-10 dark:bg-ink-950">
               <div className="flex justify-end">
                 <button
                   command="close"
                   commandfor="mobile-menu"
                   aria-label="Toggle menu"
-                  className="inline-flex rounded-full p-1.5 text-mist-950 hover:bg-mist-950/10 dark:text-white dark:hover:bg-white/10"
+                  className="inline-flex rounded-md p-1.5 text-ink-900 hover:bg-ink-900/5 dark:text-bone-100 dark:hover:bg-bone-100/10"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

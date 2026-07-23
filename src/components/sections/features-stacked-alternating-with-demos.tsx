@@ -17,20 +17,20 @@ export function Feature({
   return (
     <div
       className={clsx(
-        'group grid grid-flow-dense grid-cols-1 gap-2 rounded-lg bg-mist-950/2.5 p-2 lg:grid-cols-2 dark:bg-white/5',
+        'group grid grid-flow-dense grid-cols-1 items-center gap-2 rounded-lg border border-bone-200 bg-white/60 p-2 lg:grid-cols-2 dark:border-ink-800 dark:bg-ink-900/50',
         className,
       )}
     >
       <div className="flex flex-col justify-between gap-6 p-6 sm:gap-10 sm:p-10 lg:p-6 lg:group-even:col-start-2">
-        <div className="text-xl/8 sm:text-2xl/9">
-          <h3 className="text-mist-950 dark:text-white">{headline}</h3>
-          <div className="flex flex-col gap-4 text-mist-500">{subheadline}</div>
+        <div className="flex flex-col gap-3">
+          <h3 className="font-display text-lg/7 font-semibold tracking-tight text-ink-900 sm:text-xl/8 dark:text-bone-100">
+            {headline}
+          </h3>
+          <div className="flex flex-col gap-4 text-sm/7 text-ink-600 dark:text-bone-500">{subheadline}</div>
         </div>
         {cta}
       </div>
-      <div className="relative overflow-hidden rounded-sm lg:group-even:col-start-1 dark:after:absolute dark:after:inset-0 dark:after:rounded-sm dark:after:outline-1 dark:after:-outline-offset-1 dark:after:outline-white/10">
-        {demo}
-      </div>
+      <div className="lg:group-even:col-start-1">{demo}</div>
     </div>
   )
 }

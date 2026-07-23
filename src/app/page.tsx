@@ -4,7 +4,7 @@ import { ButtonLink, PlainButtonLink } from '@/components/elements/button'
 import { Eyebrow } from '@/components/elements/eyebrow'
 import { InstallCommand } from '@/components/elements/install-command'
 import { Link } from '@/components/elements/link'
-import { Screenshot } from '@/components/elements/screenshot'
+import { TerminalWindow } from '@/components/elements/terminal-window'
 import { ArrowNarrowRightIcon } from '@/components/icons/arrow-narrow-right-icon'
 import { CallToActionSimpleCentered } from '@/components/sections/call-to-action-simple-centered'
 import { Faq, FAQsAccordion } from '@/components/sections/faqs-accordion'
@@ -13,16 +13,21 @@ import {
   Feature as FeatureDemo,
   FeaturesStackedAlternatingWithDemos,
 } from '@/components/sections/features-stacked-alternating-with-demos'
-import { HeroSimpleCentered } from '@/components/sections/hero-simple-centered'
+import { HeroTerminal } from '@/components/sections/hero-terminal'
 
 export default function Page() {
   return (
     <>
       {/* Hero */}
-      <HeroSimpleCentered
+      <HeroTerminal
         id="hero"
-        eyebrow={<Eyebrow>Open Source Laravel Starter</Eyebrow>}
-        headline="Bootstrap your next Laravel project in seconds"
+        eyebrow="# open-source laravel starter"
+        headline={
+          <>
+            Zero to production-ready Laravel in{' '}
+            <span className="text-flame-600 dark:text-flame-400">one command.</span>
+          </>
+        }
         subheadline={
           <p>
             Kickoff sets up Livewire, Pest, PHPStan, Rector, GitHub Actions, an admin dashboard, roles &amp;
@@ -30,17 +35,20 @@ export default function Page() {
           </p>
         }
         cta={
-          <div className="flex flex-col items-center gap-6">
-            <div className="flex items-center gap-4">
+          <div className="flex w-full flex-col gap-6">
+            <div className="flex flex-wrap items-center gap-4">
               <ButtonLink href="https://github.com/cleaniquecoders/kickoff" size="lg">
                 View on GitHub
               </ButtonLink>
 
-              <PlainButtonLink href="#features" size="lg">
-                See features <ArrowNarrowRightIcon />
+              <PlainButtonLink href="#features" size="lg" className="text-flame-600! hover:text-flame-500! dark:text-flame-400!">
+                See what&apos;s inside <ArrowNarrowRightIcon />
               </PlainButtonLink>
             </div>
-            <InstallCommand snippet="composer global require cleaniquecoders/kickoff" />
+            <InstallCommand
+              className="w-fit max-w-full"
+              snippet="composer global require cleaniquecoders/kickoff"
+            />
           </div>
         }
       />
@@ -48,7 +56,7 @@ export default function Page() {
       {/* Features */}
       <FeaturesThreeColumn
         id="features"
-        eyebrow="What you get"
+        eyebrow="# what you get"
         headline="Everything you need for a production-ready Laravel app."
         subheadline={
           <p>Kickoff bundles the best Laravel packages and tooling so you can skip the boilerplate and start building.</p>
@@ -56,40 +64,30 @@ export default function Page() {
         features={
           <>
             <FeatureCard
-              headline="Authentication Ready"
+              headline="Authentication ready"
               subheadline={
                 <p>Complete auth with login, registration, password reset, and email verification out of the box.</p>
               }
             />
             <FeatureCard
-              headline="Roles & Permissions"
-              subheadline={
-                <p>Flexible role-based access control powered by Spatie Laravel Permission.</p>
-              }
+              headline="Roles & permissions"
+              subheadline={<p>Flexible role-based access control powered by Spatie Laravel Permission.</p>}
             />
             <FeatureCard
-              headline="Activity Logging"
-              subheadline={
-                <p>Full audit trail for your application using Spatie Activity Log.</p>
-              }
+              headline="Activity logging"
+              subheadline={<p>Full audit trail for your application using Spatie Activity Log.</p>}
             />
             <FeatureCard
-              headline="Livewire Powered"
-              subheadline={
-                <p>Interactive UI components with Livewire 4 and Flux — no JavaScript framework needed.</p>
-              }
+              headline="Livewire powered"
+              subheadline={<p>Interactive UI components with Livewire 4 and Flux — no JavaScript framework needed.</p>}
             />
             <FeatureCard
-              headline="Media Management"
-              subheadline={
-                <p>File uploads with Spatie Media Library, ready for S3 and cloud storage.</p>
-              }
+              headline="Media management"
+              subheadline={<p>File uploads with Spatie Media Library, ready for S3 and cloud storage.</p>}
             />
             <FeatureCard
-              headline="Dark Mode"
-              subheadline={
-                <p>Light and dark themes with system preference detection built in.</p>
-              }
+              headline="Dark mode"
+              subheadline={<p>Light and dark themes with system preference detection built in.</p>}
             />
           </>
         }
@@ -98,7 +96,7 @@ export default function Page() {
       {/* Screenshots */}
       <FeaturesStackedAlternatingWithDemos
         id="screenshots"
-        eyebrow="See it in action"
+        eyebrow="# see it in action"
         headline="A fully-featured admin panel, ready to go."
         subheadline={
           <p>Kickoff generates a complete admin dashboard with user management, role configuration, and system settings.</p>
@@ -106,7 +104,7 @@ export default function Page() {
         features={
           <>
             <FeatureDemo
-              headline="Admin Dashboard"
+              headline="Admin dashboard"
               subheadline={
                 <p>
                   A fully-featured admin dashboard with user statistics, quick actions, and system information at a
@@ -119,19 +117,19 @@ export default function Page() {
                 </Link>
               }
               demo={
-                <Screenshot wallpaper="purple" placement="bottom-right">
+                <TerminalWindow title="my-app › dashboard">
                   <Image
                     src="/img/kickoff/dashboard.png"
                     alt="Kickoff admin dashboard"
                     width={1920}
                     height={1080}
-                    className="bg-white/75"
+                    className="w-full"
                   />
-                </Screenshot>
+                </TerminalWindow>
               }
             />
             <FeatureDemo
-              headline="Role & Permission Management"
+              headline="Role & permission management"
               subheadline={
                 <p>
                   Manage roles with granular permissions using Spatie Laravel Permission. Assign and revoke access with
@@ -144,19 +142,19 @@ export default function Page() {
                 </Link>
               }
               demo={
-                <Screenshot wallpaper="blue" placement="bottom-left">
+                <TerminalWindow title="my-app › roles & permissions">
                   <Image
                     src="/img/kickoff/role-permissions.png"
                     alt="Role and permission management"
                     width={1920}
                     height={1080}
-                    className="bg-white/75"
+                    className="w-full"
                   />
-                </Screenshot>
+                </TerminalWindow>
               }
             />
             <FeatureDemo
-              headline="Settings Management"
+              headline="Settings management"
               subheadline={
                 <p>
                   Configure application settings through an intuitive admin interface — email, notifications, and more.
@@ -168,15 +166,15 @@ export default function Page() {
                 </Link>
               }
               demo={
-                <Screenshot wallpaper="purple" placement="bottom-right">
+                <TerminalWindow title="my-app › settings">
                   <Image
                     src="/img/kickoff/settings-email.png"
                     alt="Settings management"
                     width={1920}
                     height={1080}
-                    className="bg-white/75"
+                    className="w-full"
                   />
-                </Screenshot>
+                </TerminalWindow>
               }
             />
           </>
@@ -186,7 +184,7 @@ export default function Page() {
       {/* Developer Tools */}
       <FeaturesThreeColumn
         id="dev-tools"
-        eyebrow="Built for developers"
+        eyebrow="# built for developers"
         headline="Code quality and CI/CD from day one."
         subheadline={
           <p>
@@ -197,40 +195,28 @@ export default function Page() {
         features={
           <>
             <FeatureCard
-              headline="Static Analysis"
-              subheadline={
-                <p>PHPStan with Larastan pre-configured for maximum code quality and type safety.</p>
-              }
+              headline="phpstan"
+              subheadline={<p>Static analysis with Larastan pre-configured for maximum code quality and type safety.</p>}
             />
             <FeatureCard
-              headline="Automated Refactoring"
-              subheadline={
-                <p>Rector with Laravel rules for automated code improvements and clean architecture.</p>
-              }
+              headline="rector"
+              subheadline={<p>Automated refactoring with Laravel rules for code improvements and clean architecture.</p>}
             />
             <FeatureCard
-              headline="Testing"
-              subheadline={
-                <p>Pest with architecture testing configured out of the box. Write tests from day one.</p>
-              }
+              headline="pest"
+              subheadline={<p>Testing with architecture rules configured out of the box. Write tests from day one.</p>}
             />
             <FeatureCard
-              headline="CI/CD Workflows"
-              subheadline={
-                <p>GitHub Actions for Pint, PHPStan, Rector, and Pest — automated on every push.</p>
-              }
+              headline="github-actions"
+              subheadline={<p>CI workflows for Pint, PHPStan, Rector, and Pest — automated on every push.</p>}
             />
             <FeatureCard
-              headline="Automation Scripts"
-              subheadline={
-                <p>Deploy, backup, and dependency update scripts in the bin/ directory, ready to use.</p>
-              }
+              headline="bin/"
+              subheadline={<p>Deploy, backup, and dependency update scripts, ready to use.</p>}
             />
             <FeatureCard
-              headline="Project Structure"
-              subheadline={
-                <p>Organized routes, helpers, documentation templates, and infrastructure config from the start.</p>
-              }
+              headline="project structure"
+              subheadline={<p>Organized routes, helpers, documentation templates, and infrastructure config from the start.</p>}
             />
           </>
         }
@@ -239,18 +225,28 @@ export default function Page() {
       {/* Quick Start */}
       <CallToActionSimpleCentered
         id="install"
+        eyebrow="# quick start"
         headline="Get started in three commands"
         cta={
-          <div className="flex w-full max-w-lg flex-col gap-3">
-            <InstallCommand snippet="composer global require cleaniquecoders/kickoff" />
-            <InstallCommand snippet="composer global require laravel/installer" />
-            <InstallCommand snippet="kickoff start <owner> <project-name>" />
-          </div>
+          <TerminalWindow title="quick-start.sh" className="w-full max-w-2xl" bodyClassName="flex flex-col gap-4 p-4 sm:p-6">
+            <div className="flex flex-col gap-1">
+              <div className="pl-3 font-mono text-xs/6 text-bone-500 select-none"># 1 · install the laravel installer</div>
+              <InstallCommand variant="terminal" snippet="composer global require laravel/installer" />
+            </div>
+            <div className="flex flex-col gap-1">
+              <div className="pl-3 font-mono text-xs/6 text-bone-500 select-none"># 2 · install the kickoff CLI</div>
+              <InstallCommand variant="terminal" snippet="composer global require cleaniquecoders/kickoff" />
+            </div>
+            <div className="flex flex-col gap-1">
+              <div className="pl-3 font-mono text-xs/6 text-bone-500 select-none"># 3 · scaffold your app</div>
+              <InstallCommand variant="terminal" snippet="kickoff start <owner> <project-name>" />
+            </div>
+          </TerminalWindow>
         }
       />
 
       {/* FAQs */}
-      <FAQsAccordion id="faq" headline="Frequently Asked Questions">
+      <FAQsAccordion id="faq" eyebrow={<Eyebrow># faq</Eyebrow>} headline="Frequently asked questions">
         <Faq
           id="faq-1"
           question="What does Kickoff do?"
@@ -269,7 +265,7 @@ export default function Page() {
         <Faq
           id="faq-4"
           question="Does it work with the latest Laravel?"
-          answer="Yes. Kickoff targets Laravel 12 with Livewire 4, Pest, and the latest versions of all included packages."
+          answer="Yes. Kickoff targets Laravel 13 with Livewire 4, Pest, and the latest versions of all included packages."
         />
         <Faq
           id="faq-5"
@@ -283,16 +279,14 @@ export default function Page() {
         id="cta"
         headline="Ready to kickoff your next Laravel project?"
         subheadline={
-          <p>
-            Start building with production-ready tooling in seconds. Kickoff is free and open source.
-          </p>
+          <p>Start building with production-ready tooling in seconds. Kickoff is free and open source.</p>
         }
         cta={
-          <div className="flex flex-col items-center gap-6">
+          <div className="flex w-full flex-col items-center gap-6">
             <ButtonLink href="https://github.com/cleaniquecoders/kickoff" size="lg">
               Get started on GitHub
             </ButtonLink>
-            <InstallCommand snippet="composer global require cleaniquecoders/kickoff" />
+            <InstallCommand className="w-fit max-w-full" snippet="composer global require cleaniquecoders/kickoff" />
           </div>
         }
       />

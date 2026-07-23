@@ -8,6 +8,13 @@ const sizes = {
   lg: 'px-4 py-2',
 }
 
+const base = 'inline-flex shrink-0 items-center justify-center gap-2 rounded-md font-mono text-sm/7 font-medium'
+
+const colors = {
+  'dark/light': 'bg-flame-600 text-white hover:bg-flame-500',
+  light: 'bg-white text-ink-950 hover:bg-bone-50',
+}
+
 export function Button({
   size = 'md',
   type = 'button',
@@ -16,22 +23,9 @@ export function Button({
   ...props
 }: {
   size?: keyof typeof sizes
-  color?: 'dark/light' | 'light'
+  color?: keyof typeof colors
 } & ComponentProps<'button'>) {
-  return (
-    <button
-      type={type}
-      className={clsx(
-        'inline-flex shrink-0 items-center justify-center gap-1 rounded-full text-sm/7 font-medium',
-        color === 'dark/light' &&
-          'bg-mist-950 text-white hover:bg-mist-800 dark:bg-mist-300 dark:text-mist-950 dark:hover:bg-mist-200',
-        color === 'light' && 'hover bg-white text-mist-950 hover:bg-mist-100 dark:bg-mist-100 dark:hover:bg-white',
-        sizes[size],
-        className,
-      )}
-      {...props}
-    />
-  )
+  return <button type={type} className={clsx(base, colors[color], sizes[size], className)} {...props} />
 }
 
 export function ButtonLink({
@@ -43,23 +37,13 @@ export function ButtonLink({
 }: {
   href: string
   size?: keyof typeof sizes
-  color?: 'dark/light' | 'light'
+  color?: keyof typeof colors
 } & Omit<ComponentProps<'a'>, 'href'>) {
-  return (
-    <Link
-      href={href}
-      className={clsx(
-        'inline-flex shrink-0 items-center justify-center gap-1 rounded-full text-sm/7 font-medium',
-        color === 'dark/light' &&
-          'bg-mist-950 text-white hover:bg-mist-800 dark:bg-mist-300 dark:text-mist-950 dark:hover:bg-mist-200',
-        color === 'light' && 'hover bg-white text-mist-950 hover:bg-mist-100 dark:bg-mist-100 dark:hover:bg-white',
-        sizes[size],
-        className,
-      )}
-      {...props}
-    />
-  )
+  return <Link href={href} className={clsx(base, colors[color], sizes[size], className)} {...props} />
 }
+
+const soft =
+  'border border-bone-200 bg-white/60 text-ink-900 hover:bg-white dark:border-ink-700 dark:bg-ink-900/60 dark:text-bone-100 dark:hover:border-ink-600 dark:hover:bg-ink-800'
 
 export function SoftButton({
   size = 'md',
@@ -69,17 +53,7 @@ export function SoftButton({
 }: {
   size?: keyof typeof sizes
 } & ComponentProps<'button'>) {
-  return (
-    <button
-      type={type}
-      className={clsx(
-        'inline-flex shrink-0 items-center justify-center gap-1 rounded-full bg-mist-950/10 text-sm/7 font-medium text-mist-950 hover:bg-mist-950/15 dark:bg-white/10 dark:text-white dark:hover:bg-white/20',
-        sizes[size],
-        className,
-      )}
-      {...props}
-    />
-  )
+  return <button type={type} className={clsx(base, soft, sizes[size], className)} {...props} />
 }
 
 export function SoftButtonLink({
@@ -91,17 +65,13 @@ export function SoftButtonLink({
   href: string
   size?: keyof typeof sizes
 } & Omit<ComponentProps<'a'>, 'href'>) {
-  return (
-    <Link
-      href={href}
-      className={clsx(
-        'inline-flex shrink-0 items-center justify-center gap-1 rounded-full bg-mist-950/10 text-sm/7 font-medium text-mist-950 hover:bg-mist-950/15 dark:bg-white/10 dark:text-white dark:hover:bg-white/20',
-        sizes[size],
-        className,
-      )}
-      {...props}
-    />
-  )
+  return <Link href={href} className={clsx(base, soft, sizes[size], className)} {...props} />
+}
+
+const plainColors = {
+  'dark/light':
+    'text-ink-900 hover:bg-ink-900/5 hover:text-flame-600 dark:text-bone-100 dark:hover:bg-bone-100/10 dark:hover:text-flame-400',
+  light: 'text-white hover:bg-white/15',
 }
 
 export function PlainButton({
@@ -112,21 +82,9 @@ export function PlainButton({
   ...props
 }: {
   size?: keyof typeof sizes
-  color?: 'dark/light' | 'light'
+  color?: keyof typeof plainColors
 } & ComponentProps<'button'>) {
-  return (
-    <button
-      type={type}
-      className={clsx(
-        'inline-flex shrink-0 items-center justify-center gap-2 rounded-full text-sm/7 font-medium',
-        color === 'dark/light' && 'text-mist-950 hover:bg-mist-950/10 dark:text-white dark:hover:bg-white/10',
-        color === 'light' && 'text-white hover:bg-white/15 dark:hover:bg-white/10',
-        sizes[size],
-        className,
-      )}
-      {...props}
-    />
-  )
+  return <button type={type} className={clsx(base, plainColors[color], sizes[size], className)} {...props} />
 }
 
 export function PlainButtonLink({
@@ -138,19 +96,7 @@ export function PlainButtonLink({
 }: {
   href: string
   size?: keyof typeof sizes
-  color?: 'dark/light' | 'light'
+  color?: keyof typeof plainColors
 } & Omit<ComponentProps<'a'>, 'href'>) {
-  return (
-    <Link
-      href={href}
-      className={clsx(
-        'inline-flex shrink-0 items-center justify-center gap-2 rounded-full text-sm/7 font-medium',
-        color === 'dark/light' && 'text-mist-950 hover:bg-mist-950/10 dark:text-white dark:hover:bg-white/10',
-        color === 'light' && 'text-white hover:bg-white/15 dark:hover:bg-white/10',
-        sizes[size],
-        className,
-      )}
-      {...props}
-    />
-  )
+  return <Link href={href} className={clsx(base, plainColors[color], sizes[size], className)} {...props} />
 }

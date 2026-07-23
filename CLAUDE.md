@@ -45,18 +45,21 @@ npm run lint     # ESLint (core-web-vitals + typescript)
 ### Key conventions
 
 - Components use `clsx/lite` for conditional class merging
-- Dark mode support via `dark:` / `not-dark:` Tailwind variants throughout
-- Custom color palette: `mist-50` through `mist-950` (defined in `src/app/globals.css`)
-- Fonts: Mona Sans (display) and Inter (sans) loaded from Google Fonts
+- **Design system: "Flame Terminal"** — light-first, terminal/developer-native aesthetic. Light (warm paper) is the default styling; dark mode via the standard `dark:` media variant for users whose OS prefers dark.
+- Custom color palette (defined in `src/app/globals.css`): `bone-*` (warm paper whites — light bg/borders, dark-mode text), `ink-*` (warm blacks — light-mode text, dark bg/surfaces/borders), `flame-*` (Laravel red-orange accent — CTAs, prompts, `✓` markers, hover), `term-green` (only for ✓ lines inside terminal windows). Legacy `mist-*` palette kept for unused kit components.
+- Smooth scrolling for anchor links (`scroll-behavior: smooth`, reduced-motion guarded); FAQ accordion animates via a grid-rows transition on `ElDisclosure` (`sections/faqs-accordion.tsx`)
+- Fonts: Martian Mono (display headings), IBM Plex Sans (body), IBM Plex Mono (code/terminal/UI labels) loaded from Google Fonts
+- Signature element: `TerminalWindow` (`src/components/elements/terminal-window.tsx`) — terminal chrome used by the hero (animated typing session in `sections/hero-terminal.tsx`), screenshot frames, and the quick-start block. Terminal windows stay dark in both color schemes. Typing/caret animations live in `globals.css` (`.term-typed`, `.term-line`, `.term-caret`) and respect `prefers-reduced-motion`.
+- Eyebrows are styled as shell comments (`# what you get`) in flame mono; logo is a flame `K` badge + `kickoff_` with blinking caret
 - `@/*` path alias resolves to `./src/*` (configured in tsconfig.json)
 - Prettier configured with `prettier-plugin-organize-imports` and `prettier-plugin-tailwindcss`
 
 ### App structure
 
 - `src/app/layout.tsx` — Root layout with shared Navbar and Footer
-- `src/app/page.tsx` — Home page (sections only, no navbar/footer)
-- `src/app/{about,pricing,privacy-policy,404}/page.tsx` — Additional pages
-- `src/app/globals.css` — Tailwind imports + custom theme
+- `src/app/page.tsx` — Home page (sections only, no navbar/footer); currently the only page
+- `src/app/globals.css` — Tailwind imports + custom theme + terminal animations
+- `src/app/icon.svg` — Favicon (white `K` on flame red)
 
 ## Adapting for Kickoff promotion
 

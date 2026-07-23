@@ -35,7 +35,7 @@ function FeatureGroup<Plan extends string>({
             {feature.name}
           </th>
           {plans.map((plan) => {
-            const value = ((value: any): value is Record<Plan, ReactNode> =>
+            const value = ((value: unknown): value is Record<Plan, ReactNode> =>
               typeof value === 'object' && value !== null && plan in value)(feature.value)
               ? feature.value[plan]
               : feature.value

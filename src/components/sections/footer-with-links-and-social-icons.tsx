@@ -6,7 +6,12 @@ import { Container } from '../elements/container'
 
 export function FooterLink({ href, className, ...props }: { href: string } & Omit<ComponentProps<'a'>, 'href'>) {
   return (
-    <li className={clsx('text-mist-700 dark:text-mist-400', className)}>
+    <li
+      className={clsx(
+        'font-mono text-ink-600 hover:text-flame-600 dark:text-bone-500 dark:hover:text-flame-400',
+        className,
+      )}
+    >
       <Link href={href} {...props} />
     </li>
   )
@@ -26,7 +31,10 @@ export function SocialLink({
       href={href}
       target="_blank"
       aria-label={name}
-      className={clsx('text-mist-950 *:size-6 dark:text-white', className)}
+      className={clsx(
+        'text-ink-900 *:size-6 hover:text-flame-600 dark:text-bone-100 dark:hover:text-flame-400',
+        className,
+      )}
       {...props}
     />
   )
@@ -45,7 +53,7 @@ export function FooterWithLinksAndSocialIcons({
 } & ComponentProps<'footer'>) {
   return (
     <footer className={clsx('pt-16', className)} {...props}>
-      <div className="bg-mist-950/2.5 py-16 text-mist-950 dark:bg-white/5 dark:text-white">
+      <div className="border-t border-bone-200 bg-white/40 py-16 text-ink-900 dark:border-ink-800 dark:bg-ink-900/40 dark:text-bone-100">
         <Container className="flex flex-col gap-10 text-center text-sm/7">
           <div className="flex flex-col gap-6">
             <nav>
@@ -53,7 +61,7 @@ export function FooterWithLinksAndSocialIcons({
             </nav>
             {socialLinks && <div className="flex items-center justify-center gap-10">{socialLinks}</div>}
           </div>
-          <div className="text-mist-600 dark:text-mist-500">{fineprint}</div>
+          <div className="font-mono text-xs/6 text-ink-500 dark:text-bone-500">{fineprint}</div>
         </Container>
       </div>
     </footer>
