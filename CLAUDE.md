@@ -56,10 +56,13 @@ npm run lint     # ESLint (core-web-vitals + typescript)
 
 ### App structure
 
-- `src/app/layout.tsx` — Root layout with shared Navbar and Footer
-- `src/app/page.tsx` — Home page (sections only, no navbar/footer); currently the only page
+- `src/app/layout.tsx` — Root layout with shared Navbar and Footer, full SEO metadata, JSON-LD (SoftwareApplication), and GA
+- `src/app/page.tsx` — Home page (sections only, no navbar/footer); currently the only page. FAQ content lives in a `faqs` array that feeds both the UI and FAQPage JSON-LD
 - `src/app/globals.css` — Tailwind imports + custom theme + terminal animations
 - `src/app/icon.svg` — Favicon (white `K` on flame red)
+- `src/app/{sitemap,robots,manifest}.ts` + `opengraph-image.tsx` — SEO/marketing infrastructure (OG image is a generated terminal-style card)
+- `src/lib/site.ts` — central site config (URL, title, description, links); URL overridable via `NEXT_PUBLIC_SITE_URL`
+- Google Analytics: set `NEXT_PUBLIC_GA_MEASUREMENT_ID` in `.env` (see `.env.example`); unset = GA disabled (`src/components/elements/google-analytics.tsx`)
 
 ## Adapting for Kickoff promotion
 

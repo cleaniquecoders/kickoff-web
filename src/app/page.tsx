@@ -15,6 +15,49 @@ import {
 } from '@/components/sections/features-stacked-alternating-with-demos'
 import { HeroTerminal } from '@/components/sections/hero-terminal'
 
+const faqs = [
+  {
+    id: 'faq-1',
+    question: 'What does Kickoff do?',
+    answer:
+      'Kickoff bootstraps a new Laravel project with production-ready tooling — Livewire, Pest, PHPStan, Rector, GitHub Actions, an admin dashboard, roles & permissions, and deployment scripts. It saves you hours of setup on every new project.',
+  },
+  {
+    id: 'faq-2',
+    question: 'Can I use Kickoff with an existing project?',
+    answer:
+      "Kickoff is designed for new projects, but you can pass '.' as the project path to apply its configuration to an existing Laravel application.",
+  },
+  {
+    id: 'faq-3',
+    question: 'What packages are included?',
+    answer:
+      'Kickoff includes Spatie Permission, Spatie Media Library, Spatie Activity Log, Laravel Debugbar, Larastan (PHPStan), Rector, Pest, and more. All configured and ready to use.',
+  },
+  {
+    id: 'faq-4',
+    question: 'Does it work with the latest Laravel?',
+    answer:
+      'Yes. Kickoff targets Laravel 13 with Livewire 4, Pest, and the latest versions of all included packages.',
+  },
+  {
+    id: 'faq-5',
+    question: 'Is it free?',
+    answer:
+      'Yes! Kickoff is open-source software released under the MIT license. Free to use, modify, and distribute.',
+  },
+]
+
+const faqStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+  })),
+}
+
 export default function Page() {
   return (
     <>
@@ -247,31 +290,10 @@ export default function Page() {
 
       {/* FAQs */}
       <FAQsAccordion id="faq" eyebrow={<Eyebrow># faq</Eyebrow>} headline="Frequently asked questions">
-        <Faq
-          id="faq-1"
-          question="What does Kickoff do?"
-          answer="Kickoff bootstraps a new Laravel project with production-ready tooling — Livewire, Pest, PHPStan, Rector, GitHub Actions, an admin dashboard, roles & permissions, and deployment scripts. It saves you hours of setup on every new project."
-        />
-        <Faq
-          id="faq-2"
-          question="Can I use Kickoff with an existing project?"
-          answer="Kickoff is designed for new projects, but you can pass '.' as the project path to apply its configuration to an existing Laravel application."
-        />
-        <Faq
-          id="faq-3"
-          question="What packages are included?"
-          answer="Kickoff includes Spatie Permission, Spatie Media Library, Spatie Activity Log, Laravel Debugbar, Larastan (PHPStan), Rector, Pest, and more. All configured and ready to use."
-        />
-        <Faq
-          id="faq-4"
-          question="Does it work with the latest Laravel?"
-          answer="Yes. Kickoff targets Laravel 13 with Livewire 4, Pest, and the latest versions of all included packages."
-        />
-        <Faq
-          id="faq-5"
-          question="Is it free?"
-          answer="Yes! Kickoff is open-source software released under the MIT license. Free to use, modify, and distribute."
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }} />
+        {faqs.map((faq) => (
+          <Faq key={faq.id} id={faq.id} question={faq.question} answer={faq.answer} />
+        ))}
       </FAQsAccordion>
 
       {/* CTA */}

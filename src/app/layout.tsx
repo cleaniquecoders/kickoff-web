@@ -1,6 +1,8 @@
 import { ButtonLink } from '@/components/elements/button'
+import { GoogleAnalytics } from '@/components/elements/google-analytics'
 import { Main } from '@/components/elements/main'
 import { ThemeToggle } from '@/components/elements/theme-toggle'
+import { site } from '@/lib/site'
 import { GitHubIcon } from '@/components/icons/social/github-icon'
 import {
   FooterLink,
@@ -12,13 +14,64 @@ import {
   NavbarLogo,
   NavbarWithLogoActionsAndLeftAlignedLinks,
 } from '@/components/sections/navbar-with-logo-actions-and-left-aligned-links'
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Kickoff — Zero to production-ready Laravel',
-  description:
-    'Kickoff bootstraps Laravel projects with Livewire, Pest, PHPStan, Rector, GitHub Actions, admin dashboard, roles & permissions, and deployment scripts.',
+  metadataBase: new URL(site.url),
+  title: {
+    default: site.title,
+    template: '%s · Kickoff',
+  },
+  description: site.description,
+  keywords: [
+    'Laravel',
+    'Laravel starter kit',
+    'Laravel boilerplate',
+    'Laravel scaffolding',
+    'Livewire',
+    'Pest',
+    'PHPStan',
+    'Rector',
+    'admin dashboard',
+    'CleaniqueCoders',
+  ],
+  authors: [{ name: 'CleaniqueCoders', url: 'https://github.com/cleaniquecoders' }],
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website',
+    url: '/',
+    siteName: site.name,
+    title: site.title,
+    description: site.description,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: site.title,
+    description: site.description,
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+}
+
+export const viewport: Viewport = {
+  themeColor: '#d92616',
+}
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: site.name,
+  description: site.description,
+  url: site.url,
+  applicationCategory: 'DeveloperApplication',
+  operatingSystem: 'Cross-platform',
+  license: 'https://opensource.org/licenses/MIT',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  author: { '@type': 'Organization', name: 'CleaniqueCoders', url: 'https://github.com/cleaniquecoders' },
+  sameAs: [site.github, site.packagist],
 }
 
 export default function RootLayout({
@@ -43,6 +96,8 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
+        <GoogleAnalytics />
         <>
           <NavbarWithLogoActionsAndLeftAlignedLinks
             id="navbar"
