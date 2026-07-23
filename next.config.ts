@@ -1,7 +1,10 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Serve modern compressed image formats when the browser supports them
+  images: {
+    formats: ['image/avif', 'image/webp'],
+  },
 }
 
 export default nextConfig

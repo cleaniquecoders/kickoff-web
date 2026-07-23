@@ -37,7 +37,13 @@ export const metadata: Metadata = {
     'CleaniqueCoders',
   ],
   authors: [{ name: 'CleaniqueCoders', url: 'https://github.com/cleaniquecoders' }],
-  alternates: { canonical: '/' },
+  alternates: {
+    canonical: '/',
+    languages: {
+      en: '/',
+      'x-default': '/',
+    },
+  },
   openGraph: {
     type: 'website',
     url: '/',
@@ -62,16 +68,48 @@ export const viewport: Viewport = {
 
 const structuredData = {
   '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: site.name,
-  description: site.description,
-  url: site.url,
-  applicationCategory: 'DeveloperApplication',
-  operatingSystem: 'Cross-platform',
-  license: 'https://opensource.org/licenses/MIT',
-  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-  author: { '@type': 'Organization', name: 'CleaniqueCoders', url: 'https://github.com/cleaniquecoders' },
-  sameAs: [site.github, site.packagist],
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${site.url}/#organization`,
+      name: 'CleaniqueCoders',
+      url: 'https://github.com/cleaniquecoders',
+      logo: `${site.url}/icon.svg`,
+      sameAs: [site.github, site.packagist],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${site.url}/#website`,
+      name: site.name,
+      url: site.url,
+      description: site.description,
+      inLanguage: 'en',
+      publisher: { '@id': `${site.url}/#organization` },
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${site.url}/#webpage`,
+      name: site.title,
+      url: site.url,
+      description: site.description,
+      inLanguage: 'en',
+      isPartOf: { '@id': `${site.url}/#website` },
+      about: { '@id': `${site.url}/#software` },
+    },
+    {
+      '@type': 'SoftwareApplication',
+      '@id': `${site.url}/#software`,
+      name: site.name,
+      description: site.description,
+      url: site.url,
+      applicationCategory: 'DeveloperApplication',
+      operatingSystem: 'Cross-platform',
+      license: 'https://opensource.org/licenses/MIT',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      author: { '@id': `${site.url}/#organization` },
+      sameAs: [site.github, site.packagist],
+    },
+  ],
 }
 
 export default function RootLayout({
